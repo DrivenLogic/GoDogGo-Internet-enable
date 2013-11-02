@@ -1,2 +1,2 @@
-Auto-GDG
+IoT-GDG
 ========

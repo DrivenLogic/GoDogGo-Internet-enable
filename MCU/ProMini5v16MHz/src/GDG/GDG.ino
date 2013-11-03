@@ -2,26 +2,34 @@
 
 /*
 
+Arduino code for GDG automation
+
 */
 
 // globals
-//SoftwareSerial commandSerial(10, 11);
+SoftwareSerial commandSerial(10, 11); // RX, TX
 int throwSignalPin = 7;
+boolean throwInProgress = false;
+int microSwitchReadPin = A2;
+int serialCommandByte;
+int analogInterferenceMargin = 100;
 
 ///
-/// Aurduino's init function
+/// Aurduino's setup (init) function
 ///
 void setup()
 {
   // configure pins
   pinMode(throwSignalPin, OUTPUT); 
+  digitalWrite(throwSignalPin, LOW); 
+  
   pinMode(A2, INPUT);
   
   // setup serial communication (high speeds appear unstable)
   Serial.begin(9600);
-  //commandSerial.begin(9600);
+  commandSerial.begin(9600);
   
-  Serial.print("Setup complete");
+  Serial.println("Setup complete");
 }
 
 ///
@@ -29,48 +37,90 @@ void setup()
 ///
 void loop()
 {
-
-  // wait for serial commands
-      // is ball ready
+  if(throwInProgress==false)
+  {
+    // read the oldest byte from the serial command buffer
+    serialCommandByte = commandSerial.read();
+    
+    // if it's a 'T' that is a throw command:
+    if (serialCommandByte == 'T') {
+      throwInProgress = true;
+        throwBall(); 
+      throwInProgress = false;
+    } 
+    
+    // if it's a 'B' that is ball query command:
+    if (serialCommandByte == 'B') {
       ballIsReady();
-      
-      // throw
-  
-  
-  delay(1000); // debug
+    } 
+  }
+  else
+  {
+    Serial.println("Throw in progress, you must wait for it to complete.");
+    commandSerial.println("E1"); // E1 = Throw in progress error.
+  }
 }
 
 ///
-/// Check for an ready ball.
+/// Check for an ready ball - deals with serial notifications etc.
 ///
 boolean ballIsReady()
 {
-  // look for zero or a small potental at the microswitch.
-  int microSwitchValue = analogRead(A2);
-  
-  if(microSwitchValue<10) //small analog interferance margin
+  if(microSwitchIsClosed()) //small analog interferance margin
   {
-     Serial.print("Ball is ready, microswitch value was: ");
-     Serial.println(microSwitchValue);
+     Serial.println("Ball is ready");
+     commandSerial.println("B1");
      return true;
   }
   
-  Serial.print("Ball is NOT ready, microswitch value was: ");
-  Serial.println(microSwitchValue);
+  Serial.println("Ball is NOT ready");
+  commandSerial.println("B0");
   return false; 
 }
 
 ///
-/// 
+/// Issues the throw signal
 ///
 void throwBall()
 {
   // check that a ball is ready
-  if(ballIsReady())
+  if(microSwitchIsClosed())
   {
+    commandSerial.println("T1");
+    Serial.println("Starting throw...");
     digitalWrite(throwSignalPin, HIGH); 
-    delay(6800); // run motor for 6800 millis 
-  }          
+    
+      // send the motor signal while the switch remains closed.
+      // this is the same behaviour as the onboard PIC16F616
+      while(microSwitchIsClosed()){}; 
+    
+    digitalWrite(throwSignalPin, LOW); 
+    Serial.println("Throw Complete.");
+  }
+  else
+  {
+     Serial.println("Ball is ready");
+     commandSerial.println("T0");
+  }
+}
+
+///
+/// See if the microswitch is open or closed. denotes the presence of a ball. 
+///
+boolean microSwitchIsClosed()
+{
+  // look for zero or a small potental at the microswitch.
+  int microSwitchValue = analogRead(microSwitchReadPin);
+  
+  Serial.print("microSwitchValue: ");
+  Serial.println(microSwitchValue);
+     
+  if(microSwitchValue<analogInterferenceMargin) //small analog interferance margin
+  {
+    return true;
+  }
+  
+  return false;
 }
 
 

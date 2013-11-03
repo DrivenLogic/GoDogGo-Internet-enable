@@ -4,7 +4,7 @@ import serial
 
 s = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
 
-s.write('L')
+s.write('T')
 s.read()
 s.readline()
 

@@ -8,7 +8,7 @@ Arduino code for GDG automation
 
 // globals
 SoftwareSerial commandSerial(10, 11); // RX, TX
-int throwSignalPin = 7;
+int throwSignalPin = 6;
 boolean throwInProgress = false;
 int microSwitchReadPin = A2;
 int serialCommandByte;

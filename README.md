@@ -7,6 +7,7 @@ Platform Prerequisites
 ----------------------
 
 Linux (Debian et al.)
+
 1) apt-get install python-serial
 
 OSX:

@@ -8,6 +8,8 @@ Example:
 
 	$ ./GDG.throw.cmd.py /dev/ttyUSB0
 	false
+	
+	(issues the result of the command as a boolean string)
 
 NOTE: 	
 	On OSX is may be somthing like /dev/cu.PL2303-00001014 

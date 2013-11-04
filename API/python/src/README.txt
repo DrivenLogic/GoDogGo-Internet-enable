@@ -1,0 +1,14 @@
+===============================================================================
+GDG - Basic command line python scripts
+
+--------------------------------
+Usage: 	GDG.[command].cmd.py /dev/[SerialAdaptorLocation]
+
+Example:
+
+	$ ./GDG.throw.cmd.py /dev/ttyUSB0
+	false
+
+NOTE: 	
+	On OSX is may be somthing like /dev/cu.PL2303-00001014 
+ 	To locate your adaptor try #ls /dev/cu.* 

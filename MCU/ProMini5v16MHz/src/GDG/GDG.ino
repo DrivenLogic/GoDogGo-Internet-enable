@@ -45,7 +45,7 @@ void loop()
     // if it's a 'T' that is a throw command:
     if (serialCommandByte == 'T') {
       throwInProgress = true;
-        throwBall(); 
+        throwBall(); // blocking call
       throwInProgress = false;
     } 
     
@@ -53,11 +53,6 @@ void loop()
     if (serialCommandByte == 'B') {
       ballIsReady();
     } 
-  }
-  else
-  {
-    Serial.println("Throw in progress, you must wait for it to complete.");
-    commandSerial.println("E1"); // E1 = Throw in progress error.
   }
 }
 
@@ -99,7 +94,7 @@ void throwBall()
   }
   else
   {
-     Serial.println("Ball is ready");
+     Serial.println("Can't throw the ball is NOT ready");
      commandSerial.println("T0");
   }
 }

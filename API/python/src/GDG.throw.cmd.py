@@ -11,7 +11,8 @@ s.write('T')
 # read results 
 # T1 = the throw operation was accepted 
 # T0 = the throw command could not be completed
-result = s.readline();
+result = s.readline()
+result = result.strip()
 #print(result)
 
 if result == "T1":

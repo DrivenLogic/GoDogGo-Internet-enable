@@ -6,11 +6,11 @@ Internet enable the GDG thrower unit
 Platform Prerequisites 
 ----------------------
 
-Linux (Debian et al.)
+### Linux (Debian)
 
 1) apt-get install python-serial
 
-OSX:
+### OSX:
 
 1) Check that PIP is installed
 sudo easy_install pip

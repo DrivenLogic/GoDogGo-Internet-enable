@@ -20,6 +20,7 @@ int analogInterferenceMargin = 100;
 void setup()
 {
   // configure pins
+  digitalWrite(throwSignalPin, LOW); 
   pinMode(throwSignalPin, OUTPUT); 
   digitalWrite(throwSignalPin, LOW); 
   

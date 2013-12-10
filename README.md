@@ -1,7 +1,10 @@
-IoT-GDG
+GoDogGo-Internet-enable
 ========
 
-Internet enable the GDG thrower unit
+Internet enable a GoDogGo thrower unit: http://godog.com.au/
+
+![ScreenShot](https://raw.github.com/DrivenLogic/GoDogGo-Internet-enable/master/doc/Photos/1.450.JPG)
+![ScreenShot](https://raw.github.com/DrivenLogic/GoDogGo-Internet-enable/master/doc/Photos/2.450.JPG)
 
 Platform Prerequisites 
 ----------------------

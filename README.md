@@ -1,9 +1,11 @@
 GoDogGo-Internet-enable
 ========
 
-Internet enable a GoDogGo thrower unit: http://godog.com.au/
+Arduino firmware and python to internet enable the GoDogGo™ Automatic Fetch Machine for dogs http://godog.com.au/
 
 ![ScreenShot](https://raw.github.com/DrivenLogic/GoDogGo-Internet-enable/master/doc/Photos/1.450.JPG)
+
+Photos of hardware here: https://github.com/DrivenLogic/GoDogGo-Internet-enable/tree/master/doc/Photos
 ![ScreenShot](https://raw.github.com/DrivenLogic/GoDogGo-Internet-enable/master/doc/Photos/2.450.JPG)
 
 Platform Prerequisites 

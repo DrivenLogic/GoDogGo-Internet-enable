@@ -1,4 +1,4 @@
-GoDogGo-Internet-enable
+GoDogGo-IoT
 ========
 
 Arduino firmware and python to internet enable the GoDogGo™ Automatic Fetch Machine for dogs http://godog.com.au/
